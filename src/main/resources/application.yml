@@ -1,0 +1,17 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:23306/taller-2-db-1
+    password: mysql
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: 'true'
+server:
+  port: '8081'
