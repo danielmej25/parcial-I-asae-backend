@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id "org.sonarqube" version "3.5.0.2730"
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
@@ -26,6 +27,14 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectKey", "danielmej25_parcial-I-asae-backend"
+		property "sonar.organization", "unicauca"
+		property "sonar.host.url", "https://sonarcloud.io"
+	}
 }
 
 tasks.named('test') {
