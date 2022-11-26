@@ -1,6 +1,6 @@
-package co.edu.unicauca.Parcial.I;
+package co.edu.unicauca.parcial;
 
-import co.edu.unicauca.Parcial.I.controller.DataController;
+import co.edu.unicauca.parcial.controller.DataController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

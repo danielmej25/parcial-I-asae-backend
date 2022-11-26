@@ -1,4 +1,4 @@
-package co.edu.unicauca.Parcial.I.controller;
+package co.edu.unicauca.parcial.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
