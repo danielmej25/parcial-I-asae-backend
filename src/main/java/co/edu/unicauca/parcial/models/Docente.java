@@ -1,6 +1,8 @@
 package co.edu.unicauca.parcial.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -12,6 +14,8 @@ import java.util.List;
 @Table(name = "docente")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Docente extends Persona{
     @Column(nullable = false)
     private String universidad;
