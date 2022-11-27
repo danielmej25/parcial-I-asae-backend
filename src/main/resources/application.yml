@@ -1,17 +1,22 @@
 spring:
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:23306/taller-2-db-1
-    password: mysql
+    url: "jdbc:mysql://34.28.172.99/parcial1?useSSL=false"
+    password: 12345
+    testOnBorrow: true
+    max-wait: 8000
   jpa:
-    show-sql: true
+    defer-datasource-initialization: true
+    show-sql: false
+    generate-ddl: true
     properties:
       hibernate:
         format_sql: 'true'
+        ddl-auto: create
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  sql:
+    init:
+      mode: always
 server:
   port: '8081'
