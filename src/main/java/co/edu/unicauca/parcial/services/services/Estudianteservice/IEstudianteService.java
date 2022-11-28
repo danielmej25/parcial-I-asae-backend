@@ -7,4 +7,5 @@ import co.edu.unicauca.parcial.services.DTO.EstudianteDTO;
 public interface IEstudianteService {
     public List<EstudianteDTO> getAll();
     public EstudianteDTO getById(Integer id);
+    public boolean delete(Integer id);
 }
