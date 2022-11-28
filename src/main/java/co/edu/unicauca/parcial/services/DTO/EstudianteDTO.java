@@ -1,4 +1,4 @@
-package co.edu.unicauca.parcial.service.DTO;
+package co.edu.unicauca.parcial.services.DTO;
 
 import java.util.Date;
 import java.util.List;
