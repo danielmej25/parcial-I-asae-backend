@@ -15,13 +15,13 @@ public abstract class Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_persona")
-    private int id;
+    private Integer id;
 
     @Column(name = "no_identificacion", nullable = false)
     private String noId;
 
     @Column(nullable = false, length = 30)
-    private String numeroIdentificacion;
+    private String tipoIdentificacion;
 
     @Column(nullable = false, length = 30)
     private String nombres;
