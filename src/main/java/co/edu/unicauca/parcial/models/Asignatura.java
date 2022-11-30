@@ -3,29 +3,28 @@ package co.edu.unicauca.parcial.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "asignatura")
 @Getter
 @Setter
-public class Asignatura implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+@Entity
+@Table(name = "asignatura")
+public class Asignatura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_asignatura")
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String nombre;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_curso")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objAsignatura", cascade = CascadeType.ALL)
     private List<Curso> cursos;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "asignaturas")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "docentes_asignaturas", 
+        joinColumns = @JoinColumn(name = "id_asignatura"), 
+        inverseJoinColumns = @JoinColumn(name = "id_persona"))
     private List<Docente> docentes;
 }

@@ -1,30 +1,33 @@
 package co.edu.unicauca.parcial.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.io.Serializable;
-
-@Entity
-@Table(name = "curso")
 @Getter
 @Setter
-public class Curso implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "curso")
+public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_curso")
-    private int id;
+    private Integer id;
 
     @Column(nullable = false)
     private String nombre;
 
     @Column(nullable = false)
-    private int periodo;
+    private Integer periodo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_asignatura")
-    private Asignatura asignatura;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_asignatura",nullable = false)
+    @JsonIgnore
+    private Asignatura objAsignatura;
 }

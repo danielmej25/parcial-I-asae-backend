@@ -1,19 +1,24 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # username: root
+    # url: "jdbc:mysql://34.28.172.99/parcial1?useSSL=false"
+    # password: 12345
+    #Para trabar con una bd en local
     username: root
-    url: "jdbc:mysql://34.28.172.99/parcial1?useSSL=false"
-    password: 12345
+    url: "jdbc:mysql://localhost/parcial1?useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true"
+    password: 
     testOnBorrow: true
     max-wait: 8000
   jpa:
     defer-datasource-initialization: true
     show-sql: false
     generate-ddl: true
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: 'true'
-        ddl-auto: create
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   sql:
     init:
