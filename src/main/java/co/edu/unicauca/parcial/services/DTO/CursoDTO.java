@@ -1,7 +1,5 @@
 package co.edu.unicauca.parcial.services.DTO;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +9,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AsignaturaDTO {
+public class CursoDTO {
+    
+    private int id;
 
-    private Integer id;
     private String nombre;
 
-    private List<CursoDTO> cursoDTOS;
-    private List<DocenteDTO> docenteDTOS;
+    private int periodo;
+
+    private AsignaturaDTO asignaturaDTO;
 }
