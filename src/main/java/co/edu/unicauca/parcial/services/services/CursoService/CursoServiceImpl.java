@@ -2,6 +2,7 @@ package co.edu.unicauca.parcial.services.services.CursoService;
 
 import java.util.List;
 
+import co.edu.unicauca.parcial.models.Curso;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.unicauca.parcial.models.Curso;
 import co.edu.unicauca.parcial.repositories.CursoRepository;
 import co.edu.unicauca.parcial.services.DTO.CursoDTO;
 
@@ -64,7 +64,7 @@ public class CursoServiceImpl implements ICursoService {
         if (objCurso != null) {
             objCurso.setNombre(curso.getNombre());
             objCurso.setPeriodo(curso.getPeriodo());
-            objCurso.setObjAsignatura(objCurso.getObjAsignatura());
+            objCurso.setAsignatura(objCurso.getAsignatura());
             objCurso = cursoRepository.save(objCurso);
             cursoDTO = modelMapper.map(objCurso, CursoDTO.class);
         }

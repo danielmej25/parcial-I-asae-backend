@@ -3,7 +3,7 @@ package co.edu.unicauca.parcial.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 

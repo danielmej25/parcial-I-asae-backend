@@ -1,13 +1,13 @@
 package co.edu.unicauca.parcial.services.DTO;
 
-import java.util.List;
-
 import co.edu.unicauca.parcial.models.Curso;
 import co.edu.unicauca.parcial.models.Docente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter

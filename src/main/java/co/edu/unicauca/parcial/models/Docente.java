@@ -1,19 +1,21 @@
 package co.edu.unicauca.parcial.models;
 
-import java.util.List;
-
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "docente")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Docente extends Persona{
     @Column(nullable = false)
     private String universidad;
@@ -25,8 +27,10 @@ public class Docente extends Persona{
     private float salario;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "docentes_asignaturas", 
-        joinColumns = @JoinColumn(name = "id_persona"), 
-        inverseJoinColumns = @JoinColumn(name = "id_asignatura"))
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(
+            name = "docentes_asignaturas",
+            joinColumns = @JoinColumn(name = "id_persona"),
+            inverseJoinColumns = @JoinColumn(name = "id_asignatura"))
     private List<Asignatura> asignaturas;
 }

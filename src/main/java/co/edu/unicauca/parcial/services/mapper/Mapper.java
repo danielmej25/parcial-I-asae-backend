@@ -1,17 +1,17 @@
 package co.edu.unicauca.parcial.services.mapper;
 
+import co.edu.unicauca.parcial.models.Asignatura;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import co.edu.unicauca.parcial.models.Asignatura;
-import co.edu.unicauca.parcial.models.Curso;
 import co.edu.unicauca.parcial.services.DTO.AsignaturaDTO;
-import co.edu.unicauca.parcial.services.DTO.CursoDTO;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class Mapper {
+    @Primary
     @Bean(name = "asignatura")
     public ModelMapper asignaturaMapper(){
         ModelMapper objMapper = new ModelMapper();

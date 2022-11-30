@@ -2,6 +2,9 @@ package co.edu.unicauca.parcial.services.services.AsignaturaService;
 
 import java.util.List;
 
+import co.edu.unicauca.parcial.models.Asignatura;
+import co.edu.unicauca.parcial.models.Curso;
+import co.edu.unicauca.parcial.models.Docente;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.unicauca.parcial.models.Asignatura;
-import co.edu.unicauca.parcial.models.Curso;
-import co.edu.unicauca.parcial.models.Docente;
 import co.edu.unicauca.parcial.repositories.AsignaturaRepository;
 import co.edu.unicauca.parcial.services.DTO.AsignaturaDTO;
 
@@ -30,7 +30,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     public AsignaturaDTO createAsignatura(AsignaturaDTO asignatura) {
         System.out.println("Invocando al metodo crear asignatura");
         Asignatura objAsignatura = modelMapper.map(asignatura, Asignatura.class);
-        objAsignatura.getCursos().forEach(c -> c.setObjAsignatura(objAsignatura));
+        objAsignatura.getCursos().forEach(c -> c.setAsignatura(objAsignatura));
         objAsignatura.getDocentes().forEach(d -> d.getAsignaturas().add(objAsignatura));
         Asignatura asignatura2 = asignaturaRepository.save(objAsignatura);
         return modelMapper.map(asignatura2, AsignaturaDTO.class);
@@ -69,7 +69,7 @@ public class AsignaturaServiceImpl implements IAsignturaService {
             }.getType());
             objAsignatura.setCursos(cursos);
             objAsignatura.setDocentes(docentes);
-            objAsignatura.getCursos().forEach(c -> c.setObjAsignatura(objAsignatura));
+            objAsignatura.getCursos().forEach(c -> c.setAsignatura(objAsignatura));
             objAsignatura.getDocentes().forEach(d -> d.getAsignaturas().add(objAsignatura));
             Asignatura asignaturaModificada = asignaturaRepository.save(objAsignatura);
             asignaturaDTO = modelMapper.map(asignaturaModificada, AsignaturaDTO.class);
