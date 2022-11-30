@@ -47,3 +47,5 @@ sonarqube {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+

@@ -1,4 +1,4 @@
-package co.edu.unicauca.parcial.services.services.Curso;
+package co.edu.unicauca.parcial.services.services.curso;
 
 import co.edu.unicauca.parcial.services.DTO.CursoDTO;
 

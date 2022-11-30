@@ -17,5 +17,5 @@ public class CursoDTO {
 
     private int periodo;
 
-    private AsignaturaDTO asignaturaDTO;
+    private AsignaturaDTO asignatura;
 }

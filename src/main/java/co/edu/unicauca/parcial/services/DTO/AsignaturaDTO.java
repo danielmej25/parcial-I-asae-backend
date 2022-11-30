@@ -16,6 +16,6 @@ public class AsignaturaDTO {
     private Integer id;
     private String nombre;
 
-    private List<CursoDTO> cursoDTOS;
-    private List<DocenteDTO> docenteDTOS;
+    private List<CursoDTO> cursos;
+    private List<DocenteDTO> docentes;
 }

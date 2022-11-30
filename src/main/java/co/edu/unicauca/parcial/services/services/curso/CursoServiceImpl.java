@@ -1,4 +1,4 @@
-package co.edu.unicauca.parcial.services.services.Curso;
+package co.edu.unicauca.parcial.services.services.curso;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import co.edu.unicauca.parcial.models.Curso;
 import co.edu.unicauca.parcial.repositories.AsignaturaRepository;
 import co.edu.unicauca.parcial.repositories.CursoRepository;
 import co.edu.unicauca.parcial.services.DTO.CursoDTO;
-import co.edu.unicauca.parcial.services.mapper.Curso.CursoMapper;
+import co.edu.unicauca.parcial.services.mapper.curso.CursoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ public class CursoServiceImpl implements ICursoService {
     @Override
     @Transactional()
     public CursoDTO createCurso(CursoDTO cursoDTO) {
-        Curso curso = cursoMapper.DtoToEntity(cursoDTO);
+        Curso curso = cursoMapper.dtoToEntity(cursoDTO);
         return cursoMapper.entityToDto(cursoRepository.save(curso));
     }
 
@@ -43,7 +43,6 @@ public class CursoServiceImpl implements ICursoService {
     @Override
     @Transactional(readOnly = false)
     public boolean deleteCurso(Integer id) {
-        System.out.println("Invocando al metodo eliminar curso por id: " + id);
         boolean result = false;
         Curso curso = cursoRepository.findById(id).orElse(null);
         if (curso != null) {
@@ -57,7 +56,7 @@ public class CursoServiceImpl implements ICursoService {
     @Transactional(readOnly = true)
     public List<CursoDTO> getAllCursos() {
 
-        return cursoMapper.entityListToDtoList(cursoRepository.findAll());
+        return cursoMapper.entityListToDtoListCurso(cursoRepository.findAll());
     }
 
 }

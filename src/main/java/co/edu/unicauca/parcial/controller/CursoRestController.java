@@ -3,7 +3,7 @@ package co.edu.unicauca.parcial.controller;
 import java.util.List;
 
 import co.edu.unicauca.parcial.services.DTO.CursoDTO;
-import co.edu.unicauca.parcial.services.services.Curso.ICursoService;
+import co.edu.unicauca.parcial.services.services.curso.ICursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,14 +25,12 @@ public class CursoRestController {
 
     @GetMapping("/cursos")
     public List<CursoDTO> index() {
-        List<CursoDTO> cursos = cursoService.getAllCursos();
-        return cursos;
+        return cursoService.getAllCursos();
     }
 
     @GetMapping("/cursos/{id}")
     public CursoDTO show(@PathVariable Integer id) {
-        CursoDTO curso = cursoService.getCursoById(id);
-        return curso;
+        return cursoService.getCursoById(id);
     }
 
     @PostMapping("/cursos")

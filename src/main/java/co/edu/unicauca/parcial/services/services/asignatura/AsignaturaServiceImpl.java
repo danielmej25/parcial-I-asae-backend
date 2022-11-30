@@ -1,25 +1,21 @@
-package co.edu.unicauca.parcial.services.services.Asignatura;
+package co.edu.unicauca.parcial.services.services.asignatura;
 
 import java.util.List;
 
 import co.edu.unicauca.parcial.models.Asignatura;
-import co.edu.unicauca.parcial.models.Curso;
-import co.edu.unicauca.parcial.models.Docente;
 import co.edu.unicauca.parcial.repositories.AsignaturaRepository;
 import co.edu.unicauca.parcial.services.DTO.AsignaturaDTO;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import co.edu.unicauca.parcial.services.mapper.asignatura.AsignaturaMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@RequiredArgsConstructor
 @Service
 public class AsignaturaServiceImpl implements IAsignturaService {
 
-    @Autowired
-    private AsignaturaRepository asignaturaRepository;
+    private final AsignaturaRepository asignaturaRepository;
+    private final AsignaturaMapper asignaturaMapper;
 
     @Override
     @Transactional()
@@ -30,7 +26,8 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     @Override
     @Transactional(readOnly = true)
     public List<AsignaturaDTO> getAllAsignaturas() {
-        return null;
+        List<Asignatura> asignaturas = asignaturaRepository.findAll();
+        return asignaturaMapper.entityToDto(asignaturas);
     }
 
     @Override

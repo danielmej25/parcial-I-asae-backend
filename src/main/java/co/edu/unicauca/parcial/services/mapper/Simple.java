@@ -1,4 +1,4 @@
-package co.edu.unicauca.parcial.services.mapper.Curso;
+package co.edu.unicauca.parcial.services.mapper;
 
 import org.mapstruct.Qualifier;
 

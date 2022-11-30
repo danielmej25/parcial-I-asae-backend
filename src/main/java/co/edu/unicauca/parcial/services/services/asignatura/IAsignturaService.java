@@ -1,4 +1,4 @@
-package co.edu.unicauca.parcial.services.services.Asignatura;
+package co.edu.unicauca.parcial.services.services.asignatura;
 
 import co.edu.unicauca.parcial.services.DTO.AsignaturaDTO;
 
