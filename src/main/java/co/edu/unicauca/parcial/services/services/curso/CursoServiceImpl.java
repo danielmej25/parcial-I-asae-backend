@@ -2,7 +2,9 @@ package co.edu.unicauca.parcial.services.services.curso;
 
 import java.util.List;
 
+import co.edu.unicauca.parcial.models.Asignatura;
 import co.edu.unicauca.parcial.models.Curso;
+import co.edu.unicauca.parcial.repositories.AsignaturaRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class CursoServiceImpl implements ICursoService {
     private CursoRepository cursoRepository;
 
     @Autowired
+    private AsignaturaRepository asignaturaRepository;
+
+    @Autowired
     @Qualifier("curso")
     private ModelMapper modelMapper;
 
@@ -33,14 +38,15 @@ public class CursoServiceImpl implements ICursoService {
 
     @Override
     @Transactional()
-    public CursoDTO createCurso(CursoDTO curso) {
-        Curso objCurso = modelMapper.map(curso, Curso.class);
-        CursoDTO cursoDTO = null;
-        Curso cursoAlmacenado = cursoRepository.save(objCurso);
-
-        cursoDTO = modelMapper.map(cursoAlmacenado, CursoDTO.class);
-
-        return cursoDTO;
+    public CursoDTO createCurso(CursoDTO cursoDTO) {
+        Curso objCurso = modelMapper.map(cursoDTO, Curso.class);
+        Asignatura asignatura = asignaturaRepository.findById(cursoDTO.getObjAsignatura().getId()).orElse(null);
+        if (asignatura == null){
+            //TODO respond with e.g. 400 "bad request
+            return null;
+        }
+        objCurso.setAsignatura(asignatura);
+        return modelMapper.map(cursoRepository.save(objCurso), CursoDTO.class);
     }
 
     @Override
