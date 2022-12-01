@@ -30,6 +30,7 @@ public class EstudianteImpl implements IEstudianteService{
         System.out.println("invocando al metodo crear estudiante");
         Estudiante objEstudiante = this.mapper.map(estudiante,Estudiante.class);
 
+        //Preguntar profeso
         objEstudiante.getTelefonos().forEach(telefono -> telefono.setEstudiante(objEstudiante));
         objEstudiante.getDireccion().setIdEstudiante(objEstudiante);
 
