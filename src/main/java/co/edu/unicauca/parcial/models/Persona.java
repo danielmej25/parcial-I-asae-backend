@@ -9,8 +9,8 @@ import java.io.Serializable;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Persona implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Persona {
+    //private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

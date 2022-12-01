@@ -8,12 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import co.edu.unicauca.parcial.models.Estudiante;
 import co.edu.unicauca.parcial.services.DTO.EstudianteDTO;
 
-//@Configuration
+@Configuration
 public class Mapper {
     @Bean
     public ModelMapper modelMapperEstudiante(){
         ModelMapper objMapper = new ModelMapper();
-        TypeMap<Estudiante, EstudianteDTO> mapa = objMapper.emptyTypeMap(Estudiante.class, EstudianteDTO.class);
+        
+        //TypeMap<Estudiante, EstudianteDTO> mapa = objMapper.emptyTypeMap(Estudiante.class, EstudianteDTO.class);
         return objMapper;
     }
 }

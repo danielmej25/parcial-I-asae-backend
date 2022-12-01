@@ -1,6 +1,7 @@
 package co.edu.unicauca.parcial.services.services.Estudianteservice;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,22 +9,69 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicauca.parcial.models.Estudiante;
+import co.edu.unicauca.parcial.models.Telefono;
+import co.edu.unicauca.parcial.models.Direccion;
 import co.edu.unicauca.parcial.repositories.EstudianteRepository;
 import co.edu.unicauca.parcial.services.DTO.EstudianteDTO;
 
 
 @Service
 public class EstudianteImpl implements IEstudianteService{
-
-    //TODO: por que no funciona el mapper creado estudiante mapper?
-    //TODO: no se puede crear mas mapper? toca hacer todo des
+  
     @Autowired
     private ModelMapper mapper;
 
     @Autowired
     EstudianteRepository accesoDatos;
+
+    @Override
+    @Transactional
+    public EstudianteDTO save(EstudianteDTO estudiante) {
+        EstudianteDTO  estudianteDTO = null;
+        
+            System.out.println("invocando al metodo crear estudiante");
+            Estudiante objEstudiante = this.mapper.map(estudiante,Estudiante.class);
+           
+            Estudiante estudianteEntity = this.accesoDatos.save(objEstudiante);
+            estudianteDTO = this.mapper.map(estudianteEntity, EstudianteDTO.class);
+       
+       
+        return estudianteDTO;
+    }
+
+
+    @Override
+	@Transactional(readOnly = false)
+	public EstudianteDTO update(Integer id, EstudianteDTO objEstudianteConDatosNuevos) {
+		Optional<Estudiante> optional = this.accesoDatos.findById(id);
+		EstudianteDTO estudianteDTOActualizado = null;
+		Estudiante objEstudianteAlmacenado = optional.get();
+
+		if (objEstudianteAlmacenado != null) {
+			objEstudianteAlmacenado.setId(objEstudianteConDatosNuevos.getId());
+			objEstudianteAlmacenado.setNombres(objEstudianteConDatosNuevos.getNombres());
+			objEstudianteAlmacenado.setApellidos(objEstudianteConDatosNuevos.getApellidos());
+			objEstudianteAlmacenado.setNoId(objEstudianteConDatosNuevos.getNoId());
+            objEstudianteAlmacenado.setTipoIdentificacion(objEstudianteConDatosNuevos.getTipoIdentificacion());
+			Direccion objDireccionAlmacenada = objEstudianteAlmacenado.getDireccion();
+			objDireccionAlmacenada.setDireccionResidencia(objEstudianteConDatosNuevos.getDireccion().getDireccionResidencia());
+			objDireccionAlmacenada.setCiudad(objEstudianteConDatosNuevos.getDireccion().getCiudad());
+			objDireccionAlmacenada.setPais(objEstudianteAlmacenado.getDireccion().getPais());
+		    List<Telefono> ObjTelefonoAlmacenado = objEstudianteConDatosNuevos.getTelefonos();
+            for(int i=0;i<objEstudianteConDatosNuevos.getTelefonos().size();i++)
+            {
+                ObjTelefonoAlmacenado.get(i).setNumero(objEstudianteConDatosNuevos.getTelefonos().get(i).getTipo());
+                ObjTelefonoAlmacenado.get(i).setNumero(objEstudianteConDatosNuevos.getTelefonos().get(i).getNumero());
+            }
+            
+			Estudiante estudianteEntityActualizado = this.accesoDatos.save(objEstudianteAlmacenado);
+			estudianteDTOActualizado = this.mapper.map(estudianteEntityActualizado, EstudianteDTO.class);
+		}
+		return estudianteDTOActualizado;
+	}
 
     @Override
     public List<EstudianteDTO> getAll(){
