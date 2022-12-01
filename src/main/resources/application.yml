@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: "jdbc:mysql://127.0.0.1:23306/parcial1?useSSL=false"
-    password: mysql
+    url: "jdbc:mysql://34.28.172.99/parcial1?useSSL=false"
+    password: 12345
     testOnBorrow: true
     max-wait: 8000
   jpa:
