@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter  @Setter @AllArgsConstructor @NoArgsConstructor
 public class DireccionDTO {
     //TODO: comprobar si al hacer mapeo es necesario estudiante
-
+    private Integer id_persona;
     private String direccionResidencia;
 
     private String ciudad;

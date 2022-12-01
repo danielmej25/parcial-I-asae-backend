@@ -32,7 +32,6 @@ public class EstudianteRestController {
     @PutMapping("/clientes/{id}")
 	public EstudianteDTO update(@RequestBody EstudianteDTO cliente, @PathVariable Integer id) {
 		EstudianteDTO objEstudiante = null;
-		System.out.println("actualizando Estudiante");
 		EstudianteDTO estudianteActual = service.getById(id);
 		if (estudianteActual != null) {
 			objEstudiante = service.update(id, cliente);

@@ -1,7 +1,5 @@
 package co.edu.unicauca.parcial.services.services.Estudianteservice;
 
-import java.sql.Date;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.unicauca.parcial.models.Estudiante;
-import co.edu.unicauca.parcial.models.Telefono;
-import co.edu.unicauca.parcial.models.Direccion;
 import co.edu.unicauca.parcial.repositories.EstudianteRepository;
 import co.edu.unicauca.parcial.services.DTO.EstudianteDTO;
 
@@ -27,18 +23,22 @@ public class EstudianteImpl implements IEstudianteService{
     @Autowired
     EstudianteRepository accesoDatos;
 
+    @Autowired
+    DireccionRepository direccionRepository;
+
     @Override
     @Transactional
     public EstudianteDTO save(EstudianteDTO estudiante) {
         EstudianteDTO  estudianteDTO = null;
         
-            System.out.println("invocando al metodo crear estudiante");
-            Estudiante objEstudiante = this.mapper.map(estudiante,Estudiante.class);
-           
-            Estudiante estudianteEntity = this.accesoDatos.save(objEstudiante);
-            estudianteDTO = this.mapper.map(estudianteEntity, EstudianteDTO.class);
-       
-       
+        System.out.println("invocando al metodo crear estudiante");
+        Estudiante objEstudiante = this.mapper.map(estudiante,Estudiante.class);
+
+        objEstudiante.getTelefonos().forEach(telefono -> telefono.setEstudiante(objEstudiante));
+        objEstudiante.getDireccion().setIdEstudiante(objEstudiante);
+
+        Estudiante estudianteEntity = this.accesoDatos.save(objEstudiante);
+        estudianteDTO = this.mapper.map(estudianteEntity, EstudianteDTO.class);
         return estudianteDTO;
     }
 
@@ -46,7 +46,7 @@ public class EstudianteImpl implements IEstudianteService{
     @Override
 	@Transactional(readOnly = false)
 	public EstudianteDTO update(Integer id, EstudianteDTO objEstudianteConDatosNuevos) {
-		Optional<Estudiante> optional = this.accesoDatos.findById(id);
+		/*Optional<Estudiante> optional = this.accesoDatos.findById(id);
 		EstudianteDTO estudianteDTOActualizado = null;
 		Estudiante objEstudianteAlmacenado = optional.get();
 
@@ -70,7 +70,8 @@ public class EstudianteImpl implements IEstudianteService{
 			Estudiante estudianteEntityActualizado = this.accesoDatos.save(objEstudianteAlmacenado);
 			estudianteDTOActualizado = this.mapper.map(estudianteEntityActualizado, EstudianteDTO.class);
 		}
-		return estudianteDTOActualizado;
+		return estudianteDTOActualizado;*/
+        return null;
 	}
 
     @Override

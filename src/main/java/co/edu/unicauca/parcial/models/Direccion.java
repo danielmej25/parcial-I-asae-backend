@@ -13,6 +13,10 @@ import java.io.Serializable;
 public class Direccion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @Column(name = "id_persona")
+    private Integer id;
+
+    @MapsId
     @OneToOne
     @JoinColumn(name = "id_persona")
     private Estudiante idEstudiante;
