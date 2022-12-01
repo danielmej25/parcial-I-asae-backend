@@ -22,8 +22,7 @@ public class Asignatura implements Serializable {
     @Column(nullable = false)
     private String nombre;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_curso")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignatura")
     private List<Curso> cursos;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "asignaturas")

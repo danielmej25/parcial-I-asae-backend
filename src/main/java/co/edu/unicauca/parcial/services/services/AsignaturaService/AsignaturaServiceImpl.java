@@ -30,8 +30,8 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     public AsignaturaDTO createAsignatura(AsignaturaDTO asignatura) {
         System.out.println("Invocando al metodo crear asignatura");
         Asignatura objAsignatura = modelMapper.map(asignatura, Asignatura.class);
-        objAsignatura.getCursos().forEach(c -> c.setAsignatura(objAsignatura));
-        objAsignatura.getDocentes().forEach(d -> d.getAsignaturas().add(objAsignatura));
+        if (objAsignatura.getCursos() != null){objAsignatura.getCursos().forEach(c -> c.setAsignatura(objAsignatura));}
+        if (objAsignatura.getDocentes() != null){objAsignatura.getDocentes().forEach(d -> d.getAsignaturas().add(objAsignatura));}
         Asignatura asignatura2 = asignaturaRepository.save(objAsignatura);
         return modelMapper.map(asignatura2, AsignaturaDTO.class);
     }
