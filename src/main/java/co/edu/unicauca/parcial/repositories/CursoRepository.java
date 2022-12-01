@@ -1,10 +1,9 @@
 package co.edu.unicauca.parcial.repositories;
 
-import co.edu.unicauca.parcial.models.Curso;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-@Repository
-public interface CursoRepository extends JpaRepository<Curso, Integer> {
+import co.edu.unicauca.parcial.models.Curso;
+
+public interface CursoRepository extends CrudRepository<Curso, Integer> {
 
 }

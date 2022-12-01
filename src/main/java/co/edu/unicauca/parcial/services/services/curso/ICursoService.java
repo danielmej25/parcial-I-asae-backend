@@ -4,7 +4,6 @@ import co.edu.unicauca.parcial.services.DTO.CursoDTO;
 
 import java.util.List;
 
-
 public interface ICursoService {
     public CursoDTO createCurso(CursoDTO curso);
 
