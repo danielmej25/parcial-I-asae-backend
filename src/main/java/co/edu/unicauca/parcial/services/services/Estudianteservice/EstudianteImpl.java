@@ -22,10 +22,6 @@ public class EstudianteImpl implements IEstudianteService{
 
     @Autowired
     EstudianteRepository accesoDatos;
-
-    @Autowired
-    DireccionRepository direccionRepository;
-
     @Override
     @Transactional
     public EstudianteDTO save(EstudianteDTO estudiante) {
