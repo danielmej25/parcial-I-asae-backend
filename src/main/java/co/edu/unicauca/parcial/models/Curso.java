@@ -1,5 +1,6 @@
 package co.edu.unicauca.parcial.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,8 @@ public class Curso implements Serializable {
     @Column(nullable = false)
     private int periodo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_asignatura")
+    @JsonIgnore
     private Asignatura asignatura;
 }
