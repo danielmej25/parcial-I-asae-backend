@@ -1,4 +1,4 @@
-package co.edu.unicauca.parcial.services.services.AsignaturaService;
+package co.edu.unicauca.parcial.services.services.asignatura;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,11 +29,20 @@ public class AsignaturaServiceImpl implements IAsignturaService {
 
     @Override
     @Transactional()
-    public AsignaturaDTO createAsignatura(AsignaturaDTO asignatura) {
-        System.out.println("Invocando al metodo crear asignatura");
-        Asignatura objAsignatura = modelMapper.map(asignatura, Asignatura.class);
-        if (objAsignatura.getCursos() != null){objAsignatura.getCursos().forEach(c -> c.setAsignatura(objAsignatura));}
-        if (objAsignatura.getDocentes() != null){objAsignatura.getDocentes().forEach(d -> d.getAsignaturas().add(objAsignatura));}
+    public AsignaturaDTO createAsignatura(AsignaturaDTO asignaturaDTO) {
+        Asignatura objAsignatura = modelMapper.map(asignaturaDTO, Asignatura.class);
+        if (objAsignatura.getCursos() != null){
+            objAsignatura.getCursos().forEach(c -> c.setAsignatura(objAsignatura));
+        }else{
+            //TODO respond with e.g. 400 "bad request
+            return null;
+        }
+        if (objAsignatura.getDocentes() != null){
+            objAsignatura.getDocentes().forEach(d -> d.getAsignaturas().add(objAsignatura));
+        }else{
+            //TODO respond with e.g. 400 "bad request
+            //return null;
+        }
         Asignatura asignatura2 = asignaturaRepository.save(objAsignatura);
         return modelMapper.map(asignatura2, AsignaturaDTO.class);
     }
@@ -39,25 +50,20 @@ public class AsignaturaServiceImpl implements IAsignturaService {
     @Override
     @Transactional(readOnly = true)
     public List<AsignaturaDTO> getAllAsignaturas() {
-        System.out.println("Invocando al metodo buscar todas las asignaturas");
         Iterable<Asignatura> asignaturas = asignaturaRepository.findAll();
-        List<AsignaturaDTO> asignaturasDTO = modelMapper.map(
+        return modelMapper.map(
                 asignaturas, new TypeToken<List<AsignaturaDTO>>() {
                 }.getType());
-        return asignaturasDTO;
     }
 
     @Override
     public AsignaturaDTO getAsignaturaById(Integer id) {
-        System.out.println("Invocando al metodo buscar asignatura por id");
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
-        AsignaturaDTO asignaturaDTO = modelMapper.map(asignatura, AsignaturaDTO.class);
-        return asignaturaDTO;
+        return modelMapper.map(asignatura, AsignaturaDTO.class);
     }
 
     @Override
     public AsignaturaDTO updateAsignatura(Integer id, AsignaturaDTO asignatura) {
-        System.out.println("Invocando al metodo actualizar asignatura");
         Asignatura objAsignatura = asignaturaRepository.findById(id).orElse(null);
         AsignaturaDTO asignaturaDTO = null;
 
@@ -80,7 +86,6 @@ public class AsignaturaServiceImpl implements IAsignturaService {
 
     @Override
     public boolean deleteAsignatura(Integer id) {
-        System.out.println("Invocando al metodo eliminar asignatura");
         boolean result = false;
         Asignatura asignatura = asignaturaRepository.findById(id).orElse(null);
         if (asignatura != null) {

@@ -1,4 +1,4 @@
-package co.edu.unicauca.parcial.services.services.CursoService;
+package co.edu.unicauca.parcial.services.services.curso;
 
 import java.util.List;
 

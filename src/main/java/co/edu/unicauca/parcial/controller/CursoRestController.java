@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicauca.parcial.services.DTO.CursoDTO;
-import co.edu.unicauca.parcial.services.services.CursoService.ICursoService;
+import co.edu.unicauca.parcial.services.services.curso.ICursoService;
 
 @RestController
 @RequestMapping("/api")
@@ -28,14 +28,12 @@ public class CursoRestController {
 
     @GetMapping("/cursos")
     public List<CursoDTO> index() {
-        List<CursoDTO> cursos = cursoService.getAllCursos();
-        return cursos;
+        return cursoService.getAllCursos();
     }
 
     @GetMapping("/cursos/{id}")
     public CursoDTO show(@PathVariable Integer id) {
-        CursoDTO curso = cursoService.getCursoById(id);
-        return curso;
+        return cursoService.getCursoById(id);
     }
 
     @PostMapping("/cursos")

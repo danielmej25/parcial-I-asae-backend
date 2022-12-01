@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.unicauca.parcial.services.DTO.AsignaturaDTO;
-import co.edu.unicauca.parcial.services.services.AsignaturaService.IAsignturaService;
+import co.edu.unicauca.parcial.services.services.asignatura.IAsignturaService;
 
 @RestController
 @RequestMapping("/api")
@@ -28,14 +28,12 @@ public class AsignaturaRestController {
 
     @GetMapping("/asignaturas")
     public List<AsignaturaDTO> index() {
-        List<AsignaturaDTO> asignaturas = asignaturaService.getAllAsignaturas();
-        return asignaturas;
+        return asignaturaService.getAllAsignaturas();
     }
 
     @GetMapping("/asignaturas/{id}")
     public AsignaturaDTO show(@PathVariable Integer id) {
-        AsignaturaDTO asignatura = asignaturaService.getAsignaturaById(id);
-        return asignatura;
+        return asignaturaService.getAsignaturaById(id);
     }
 
     @PostMapping("/asignaturas")
