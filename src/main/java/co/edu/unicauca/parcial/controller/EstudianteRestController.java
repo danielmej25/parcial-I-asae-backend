@@ -28,4 +28,14 @@ public class EstudianteRestController {
     public EstudianteDTO show(@PathVariable Integer id){
         return service.getById(id);
     }
+
+    @GetMapping("/estudiantes/lazy")
+    public List<EstudianteDTO> indexLazy(){
+        return service.getAllLazy();
+    }
+
+    @GetMapping("/estudiantes/lazy/{id}")
+    public EstudianteDTO showLazy(@PathVariable Integer id){
+        return service.getByIdLazy(id);
+    }
 }
