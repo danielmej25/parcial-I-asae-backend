@@ -40,12 +40,7 @@ public class CursoServiceImpl implements ICursoService {
     @Transactional()
     public CursoDTO createCurso(CursoDTO cursoDTO) {
         Curso objCurso = modelMapper.map(cursoDTO, Curso.class);
-        Asignatura asignatura = asignaturaRepository.findById(cursoDTO.getObjAsignatura().getId()).orElse(null);
-        if (asignatura == null){
-            //TODO respond with e.g. 400 "bad request
-            return null;
-        }
-        objCurso.setAsignatura(asignatura);
+        objCurso.setAsignatura(asignaturaRepository.findById(cursoDTO.getObjAsignatura().getId()).orElse(objCurso.getAsignatura()));
         return modelMapper.map(cursoRepository.save(objCurso), CursoDTO.class);
     }
 
